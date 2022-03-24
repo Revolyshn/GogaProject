@@ -23,17 +23,50 @@ authBtn.onclick = function () {
 
 }
 
+function ClearElement(element) {
+    if (!element || !(element instanceof HTMLElement)) return;
 
-//Переход на другую страницу после авторизации
-/*function loginAccess() {
- let button = document.getElementById('submit')
- let login = document.getElementById('Username')
- let password = document.getElementById('Password')
- if ((login = 14299) && (password = '1')) {
- let notif = document.createElement('div')
- document.body.prepend(notif)
- notif.className = 'active'
- notif.textContent = 'Авторизация прошла успешно'
- window.location = '../Home_page/home.html'
- }
- }*/
+    while (element.children.length > 0) element.children[0].remove();
+}
+
+function Div(props) {
+    let div = document.createElement("div");
+
+    if (!props || typeof props !== "object") {
+        return div;
+    }
+
+    if ("textContent" in props) {
+        div.textContent = props.textContent;
+    }
+
+    if ("events" in props && typeof props.events === "object") {
+        for (let key in props.events) {
+            div[key] = props.events[key];
+        }
+    }
+
+    if ("className" in props) {
+        div.className = props.className;
+    }
+
+    if ("style" in props) {
+        div.style.cssText = props.style;
+    }
+
+    if ("id" in props) {
+        div.id = props.id;
+    }
+
+    if ("dataset" in props) {
+        for (let key in props.dataset) {
+            div.dataset[key] = props.dataset[key];
+        }
+    }
+
+    if ("children" in props) {
+        div.append(...props.children);
+    }
+
+    return div;
+}

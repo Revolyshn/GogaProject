@@ -1,0 +1,44 @@
+{{define "home"}}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/assets/css/home.css">
+        <link rel="stylesheet" href="/assets/css/right-nav-style.css">
+        <link rel="stylesheet" href="/assets/css/default.css">
+
+        <title>{{.Title}}</title>
+    </head>
+    <body>
+    {{template "header" .}}
+
+    <input type="checkbox" id="nav-toggle" hidden>
+    <nav class="nav">
+        <label for="nav-toggle" class="nav-toggle" onclick></label>
+        <h2 class="logo">
+            <a>Меню</a>
+        </h2>
+        <ul>
+            <li><a href="#1">Профиль</a>
+            <li><a href="#2">Задание</a>
+            <li><a href="#3">Выйти</a>
+        </ul>
+    </nav>
+    <div class="mask-content"></div>
+
+    <table>
+        <tr>
+            <th>№</th>
+            <th>Название</th>
+            <th>Организация</th>
+            <th>Описание</th>
+            <th>Дата</th>
+        </tr>
+    </table>
+    {{template "footer" .Users}}
+
+    <script src="/assets/js/main.js"></script>
+    <script>{{.JS}}</script>
+    </body>
+    </html>
+{{end}}

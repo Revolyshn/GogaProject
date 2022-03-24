@@ -1,0 +1,19 @@
+{{define "index"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/assets/css/default.css">
+  <title>{{.Title}}</title>
+</head>
+<body>
+{{template "header" .}}
+{{template "content"}}
+
+{{template "footer" .Users}}
+
+<script src="/assets/js/main.js"></script>
+<script>{{.JS}}</script>
+</body>
+</html>
+{{end}}

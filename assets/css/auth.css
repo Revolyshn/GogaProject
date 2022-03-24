@@ -1,0 +1,82 @@
+/* Дизайн страницы авторизации */
+*{
+    user-select: none;
+}
+.active{
+    bottom: 5px;
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    left: 5px;
+    position: fixed;
+    background-color: #3498DB;
+    padding: 20px;
+    border-radius: 7px;
+}
+.disable{
+    display: none;
+}
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #151123;
+}
+#box{
+    width: 300px;
+    padding: 25px 15px;
+    position: absolute;
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(3, 3, 3, 0.3);
+    text-align: center;
+}
+#box h1{
+    color: #3DAC7E;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+#Username, #Password{
+    background: none !important;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498DB;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+#Username:hover, #Password:hover{
+    width: 220px;
+}
+#Username:focus, #Password:focus{
+    width: 250px;
+    border-color: #2ECC71;
+}
+#submit{
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ECC71;
+    padding: 14px 10px;
+    outline: none;
+    color: #FFF;
+    width: 130px;
+    content: 'Login';
+    border-radius: 24px;
+    transition: 0.3s;
+}
+#submit:hover{
+    background: #2ECC71;
+    cursor: pointer;
+    box-shadow: 0 0 40px rgba(51, 208, 146, 0.4);
+}
+#submit:active{
+    background: #2cCC00;
+}

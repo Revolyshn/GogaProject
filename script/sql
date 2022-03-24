@@ -1,0 +1,149 @@
+CREATE TABLE "Role" (
+	"roleName" varchar(30) NOT NULL UNIQUE,
+	CONSTRAINT "Role_pk" PRIMARY KEY ("roleName")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Student" (
+	"studId" varchar(6) NOT NULL,
+	"firstName" varchar(50) NOT NULL,
+	"lastName" varchar(50) NOT NULL,
+	"surname" varchar(50),
+	"role" varchar(30) NOT NULL,
+	"course" int NOT NULL,
+	"group" varchar(4) NOT NULL,
+	"dateOfBirth" DATE NOT NULL,
+	"phoneNumber" varchar(11) NOT NULL UNIQUE,
+	"Email" varchar(100) NOT NULL UNIQUE,
+	"user" int NOT NULL,
+	CONSTRAINT "Student_pk" PRIMARY KEY ("studId")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Organization" (
+	"id" varchar(15) NOT NULL,
+	"name" varchar(255) NOT NULL,
+	"Email" varchar(100) NOT NULL UNIQUE,
+	"phoneNumber" varchar(11) NOT NULL UNIQUE,
+	"representative" varchar(12) NOT NULL UNIQUE,
+	CONSTRAINT "Organization_pk" PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Representative" (
+	"id" varchar(12) NOT NULL,
+	"firstName" varchar(50) NOT NULL,
+	"lastName" varchar(50) NOT NULL,
+	"surname" varchar(50),
+	"phoneNumber" varchar(11) NOT NULL,
+	"user" int NOT NULL,
+	CONSTRAINT "Representative_pk" PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Board" (
+	"id" serial NOT NULL,
+	"taskName" varchar(100) NOT NULL,
+	"discription" TEXT NOT NULL,
+	"representative" int NOT NULL,
+	"dateOfPosting" DATE NOT NULL,
+	CONSTRAINT "Board_pk" PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "ActiveTask" (
+	"id" serial NOT NULL,
+	"student" varchar(6) NOT NULL,
+	"task" int NOT NULL,
+	"dateOfActivation" DATE NOT NULL,
+	"teacher" varchar(12) NOT NULL,
+	"dateOfComplition" DATE,
+	"beenImplimented" bool NOT NULL,
+	CONSTRAINT "ActiveTask_pk" PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Teacher" (
+	"id" varchar(12) NOT NULL,
+	"firstName" varchar(50) NOT NULL,
+	"lastName" varchar(50) NOT NULL,
+	"surname" varchar(50) NOT NULL,
+	"phoneNumber" varchar(11) NOT NULL,
+	"user" int NOT NULL,
+	CONSTRAINT "Teacher_pk" PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "OrganizationRepresentitive" (
+	"id" serial NOT NULL UNIQUE,
+	"organiztion" varchar(15) NOT NULL,
+	"reprisentative" varchar(12) NOT NULL,
+	CONSTRAINT "OrganizationRepresentitive_pk" PRIMARY KEY ("organiztion","reprisentative")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "User" (
+	"userId" serial NOT NULL,
+	"role" varchar(30) NOT NULL,
+	"login" varchar(50) NOT NULL UNIQUE,
+	"password" varchar(50) NOT NULL,
+	CONSTRAINT "User_pk" PRIMARY KEY ("userId")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+
+ALTER TABLE "Student" ADD CONSTRAINT "Student_fk0" FOREIGN KEY ("role") REFERENCES "Role"("roleName");
+ALTER TABLE "Student" ADD CONSTRAINT "Student_fk1" FOREIGN KEY ("user") REFERENCES "User"("userId");
+
+ALTER TABLE "Organization" ADD CONSTRAINT "Organization_fk0" FOREIGN KEY ("representative") REFERENCES "Representative"("id");
+
+ALTER TABLE "Representative" ADD CONSTRAINT "Representative_fk0" FOREIGN KEY ("user") REFERENCES "User"("userId");
+
+ALTER TABLE "Board" ADD CONSTRAINT "Board_fk0" FOREIGN KEY ("representative") REFERENCES "OrganizationRepresentitive"("id");
+
+ALTER TABLE "ActiveTask" ADD CONSTRAINT "ActiveTask_fk0" FOREIGN KEY ("student") REFERENCES "Student"("studId");
+ALTER TABLE "ActiveTask" ADD CONSTRAINT "ActiveTask_fk1" FOREIGN KEY ("task") REFERENCES "Board"("id");
+ALTER TABLE "ActiveTask" ADD CONSTRAINT "ActiveTask_fk2" FOREIGN KEY ("teacher") REFERENCES "Teacher"("id");
+
+ALTER TABLE "Teacher" ADD CONSTRAINT "Teacher_fk0" FOREIGN KEY ("user") REFERENCES "User"("userId");
+
+ALTER TABLE "OrganizationRepresentitive" ADD CONSTRAINT "OrganizationRepresentitive_fk0" FOREIGN KEY ("organiztion") REFERENCES "Organization"("id");
+ALTER TABLE "OrganizationRepresentitive" ADD CONSTRAINT "OrganizationRepresentitive_fk1" FOREIGN KEY ("reprisentative") REFERENCES "Representative"("id");
+
+ALTER TABLE "User" ADD CONSTRAINT "User_fk0" FOREIGN KEY ("role") REFERENCES "Role"("roleName");
+
+
+
+
+
+
+
+
+

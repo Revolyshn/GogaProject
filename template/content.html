@@ -1,0 +1,11 @@
+{{define "content"}}
+<main>
+    <form id="box" action="content.html" method="post">
+        <h1>Login</h1>
+        <input id="Username" class="fields" type="text" placeholder="Username" name="Login" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
+        <input id="Password" class="fields" type="password" placeholder="Password" name="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+        <input id="submit" type="button" value="LOGIN" >
+    </form>
+    <script src="/assets/js/main.js"></script>
+</main>
+{{end}}
